@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Send Email Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    label, input, textarea {
+      display: block;
+      margin-bottom: 1rem;
+      width: 300px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Send Email via Outlook or Default Mail Client</h1>
+  <form id="emailForm">
+    <label for="to">To (recipient email):</label>
+    <input type="email" id="to" name="to" required placeholder="recipient@example.com" />
+
+    <label for="subject">Subject:</label>
+    <input type="text" id="subject" name="subject" required placeholder="Subject here" />
+
+    <label for="body">Message:</label>
+    <textarea id="body" name="body" rows="6" required placeholder="Write your message here"></textarea>
+
+    <button type="submit">Send Email</button>
+  </form>
+
+  <script>
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const to = encodeURIComponent(document.getElementById('to').value);
+      const subject = encodeURIComponent(document.getElementById('subject').value);
+      const body = encodeURIComponent(document.getElementById('body').value);
+
+      // Construct mailto link
+      const mailtoLink = `mailto:${to}?subject=${subject}&body=${body}`;
+
+      // Open default mail client
+      window.location.href = mailtoLink;
+    });
+  </script>
+</body>
+</html>
